@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dream Keys</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #fff;
+      color: #111;
+      padding: 2em;
+      max-width: 700px;
+      margin: auto;
+    }
+    h2 {
+      margin-top: 2em;
+      cursor: pointer;
+      color: #333;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 0.3em;
+    }
+    .card-desc {
+      display: none;
+      margin-bottom: 1.5em;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Dream Keys</h1>
+    <p><em>Last updated by Mr. David U.U. Robinson</em></p>
+    <p>Developed as part of a research project in Prague during the late 1960s, the Dream Keys were designed to test symbolic influence on subconscious pattern recognition during sleep.</p>
+  </div>
+
+  <div id="card-list"></div>
+
+  <script> 
+    const cards = [
+      { name: "Ace of Hearts", desc: "You bite into a ripe apple, revealing a lighthouse glowing softly inside. It pulses gently, mirroring your breath as mist curls around you." },
+      { name: "2 of Hearts", desc: "Two children swing above a feather-filled valley — one of glass, the other of skin. When one vanishes, the breeze shifts." },
+      { name: "3 of Hearts", desc: "A violin plays itself in an invisible room. Each note becomes honey that drips onto the floor where bees gather in stillness." },
+      { name: "4 of Hearts", desc: "You raise a red umbrella during a storm, and everything around you halts — except the light, which slips under the edges like a whisper." },
+      { name: "5 of Hearts", desc: "A letter floats over a flickering flame. As the seal breaks, smoke forms half-remembered phrases, then scatters like startled birds." },
+      { name: "6 of Hearts", desc: "A carousel turns slowly, carrying nothing but single shoes. Each one sparkles with dust, and one feels strangely familiar." },
+      { name: "7 of Hearts", desc: "In a forest clearing stands a mirror that reflects only your eyes. Behind them, faint voices recite names you don’t know." },
+      { name: "8 of Hearts", desc: "You climb into an attic full of glowing water. Fish float through the air, and one of them has your childhood smile." },
+      { name: "9 of Hearts", desc: "Each time you strike a key, a grain of sand falls. When you play a full chord, a detailed sandcastle rises, only to dissolve." },
+      { name: "10 of Hearts", desc: "A staircase built from photographs leads upward. Each step is a stranger’s memory. The final frame is missing, but the scent feels like home." },
+      { name: "Jack of Hearts", desc: "A boy runs across frozen water, kite trailing behind him. The fabric is stitched with old maps, and ice shatters softly in his wake." },
+      { name: "Queen of Hearts", desc: "A dignified woman strolls barefoot through a withering garden. Her eyes, when they meet yours, are full of earth and knowing." },
+      { name: "King of Hearts", desc: "Beneath the ocean lies a throne of ice. It never melts — even in fire — but hums with sadness when worn." },
+      { name: "Ace of Spades", desc: "Beneath a pear tree, you find a handless clock ticking. The wind shifts the moment you lift it from the soil." },
+      { name: "2 of Spades", desc: "A rope bridge stretches between two moons — one bright, one hollow and dripping stars like tears." },
+      { name: "3 of Spades", desc: "You walk down a staircase that never ends. The walls are covered in portraits of people you almost remember — none meet your gaze." },
+      { name: "4 of Spades", desc: "A bed rests deep in a cave, layered with feathers and leaves. When you lie down, it sings a tune you somehow understand." },
+      { name: "5 of Spades", desc: "You ride a silent train through a sea of fog. Occasionally, a deer appears, watching you like it knows your secrets." },
+      { name: "6 of Spades", desc: "A bare white room surrounds you. With each truth you speak, the walls close in. But when you lie, they pause." },
+      { name: "7 of Spades", desc: "A porcelain mask floats in ink. When you wear it, your reflection is older — smiling, with something unspoken in its eyes." },
+      { name: "8 of Spades", desc: "A spiral staircase winds between shelves of books. Each title is a name long forgotten — until your fingers brush the spine." },
+      { name: "9 of Spades", desc: "In your old home, the floor creaks above a slumbering whale. You hear its breath in the dark, and it remembers you." },
+      { name: "10 of Spades", desc: "You wander through rain that doesn’t wet you — it ages you. Each droplet carries a birthday as trees whisper lost dreams." },
+      { name: "Jack of Spades", desc: "Someone in your clothes waits behind a mirror. He doesn't follow when you flee — but your heart grows heavy." },
+      { name: "Queen of Spades", desc: "A silent woman tends thorny black roses inside walled silence. She never speaks, but her gaze says you don’t belong here — or maybe you do." },
+      { name: "King of Spades", desc: "A throne of obsidian stands alone. Roots rise to bind those who sit. They smile, as if fulfilling an old promise." },
+      { name: "Ace of Diamonds", desc: "A golden coin floats in your hand. It melts into a single teardrop, which rises gently into the air." },
+      { name: "2 of Diamonds", desc: "Two candles twirl in mirrored unison. Their flames dance without touching, melting in rhythm with your pulse." },
+      { name: "3 of Diamonds", desc: "A glass ladder stretches toward violet clouds. Each rung sings a note you once knew by heart." },
+      { name: "4 of Diamonds", desc: "Behind a locked closet door, coats hang waiting. Wearing one unlocks memories of a life that could have been yours." },
+      { name: "5 of Diamonds", desc: "In a glowing night market, traders offer bottled laughter and rented memories. You trade your name for something nameless but needed." },
+      { name: "6 of Diamonds", desc: "A mirror shows not your face, but your greatest desire. It keeps shifting… until finally, it reflects someone watching you back." },
+      { name: "7 of Diamonds", desc: "A paper ballerina spins in still air, made of love letters. As she turns, single words land in your hand." },
+      { name: "8 of Diamonds", desc: "An elevator opens inside a mountain. It slides through caverns of crystal and echoing laughter, stopping where you once made a vow." },
+      { name: "9 of Diamonds", desc: "At twilight in the desert, a fox appears. Its eyes glow like lanterns — inside them, glimpses of your near future." },
+      { name: "10 of Diamonds", desc: "In an endless room without a ceiling, stars fall like snowflakes. One brushes your cheek and whispers a secret compliment." },
+      { name: "Jack of Diamonds", desc: "A man in velvet deals cards of glass. You cut the deck — each card bears your face, smiling slightly differently." },
+      { name: "Queen of Diamonds", desc: "She stands beneath a chandelier dripping rose-scented crystals. Her lullaby stirs memories you thought were lost forever." },
+      { name: "King of Diamonds", desc: "A heavy vault door creaks open. Inside is no gold — only echoing laughter. Some of it is yours." },
+      { name: "Ace of Clubs", desc: "In the soil rests a midnight-colored seed. When touched, it sings a soft note that turns leaves to glass." },
+      { name: "2 of Clubs", desc: "Two wolves play a game in the forest with tokens of bone and moss. The wind shifts with each move." },
+      { name: "3 of Clubs", desc: "You wind a wooden box, releasing a tiny tornado. It carves your initials into the dust inside." },
+      { name: "4 of Clubs", desc: "A swing dangles from the moon. As you ride, your feet scatter stars into constellations spelling your wishes." },
+      { name: "5 of Clubs", desc: "You strike a drum made from thunderclouds. Each beat calls forth a new kind of storm — one grows flowers, another bends time." },
+      { name: "6 of Clubs", desc: "Tree roots spiral downward into a memory-laden stairwell. Each one you touch shares a story — some ancient, some yours." },
+      { name: "7 of Clubs", desc: "In a moonlit field, you find a crown of antlers. Fireflies sleep on each tine, waking when you hum." },
+      { name: "8 of Clubs", desc: "A wild horse runs through mirrored woods. Its leafy mane spells a question as it gallops past." },
+      { name: "9 of Clubs", desc: "Above the clouds, a volcano exhales colored mist — pinks and golds that wrap around you like breath." },
+      { name: "10 of Clubs", desc: "A hundred faceless dancers move in silence. One extends a hand — you already know the steps." },
+      { name: "Jack of Clubs", desc: "A courier dashes through rain, ferns growing from his shoulders. He bears a letter sealed with wax that knows your name." },
+      { name: "Queen of Clubs", desc: "She sits on a throne of vines and shadows. Bees glow under her skin. Her voice drips honey that wakes the plants." },
+      { name: "King of Clubs", desc: "At a cliff’s edge, a still figure wears a crown of ants. He understands all that has ever touched the earth." }
+    ];
+
+   const container = document.getElementById("card-list");
+
+    cards.forEach((card, index) => {
+      const h2 = document.createElement("h2");
+      h2.textContent = card.name;
+      h2.classList.add("karte");
+      h2.dataset.headline = card.name;
+
+      h2.onclick = () => {
+        const desc = document.getElementById(`desc-${index}`);
+        desc.style.display = desc.style.display === "block" ? "none" : "block";
+
+        // Nachricht an notify.php senden
+        const headline = h2.dataset.headline;
+        fetch("https://endlichproduktiv.de/notify.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ message: `Karte geklickt: ${headline}` })
+        }).catch(error => console.error('Fehler beim Senden:', error));
+      };
+
+      const desc = document.createElement("div");
+      desc.id = `desc-${index}`;
+      desc.className = "card-desc";
+      desc.innerText = card.desc;
+
+      container.appendChild(h2);
+      container.appendChild(desc);
+    });
+  </script>
+</body>
+</html>
