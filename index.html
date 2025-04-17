@@ -35,6 +35,12 @@
   </div>
 
   <div id="card-list"></div>
+  
+<div style="text-align:center; margin-top: 3em;">
+  <a href="notes.html" style="text-decoration: underline; color: #444; font-family:serif;">
+    View more research notes
+  </a>
+</div>
 
   <script> 
     const cards = [
@@ -104,7 +110,6 @@
         const desc = document.getElementById(`desc-${index}`);
         desc.style.display = desc.style.display === "block" ? "none" : "block";
 
-        // Nachricht an notify.php senden
         const headline = h2.dataset.headline;
         fetch("https://endlichproduktiv.de/notify.php", {
           method: "POST",
@@ -124,8 +129,5 @@
       container.appendChild(desc);
     });
   </script>
-  <a href="notes.html" style="display:block; text-align:center; margin-top:40px; font-family:serif; font-size:1.1em;">
-  View Research Notes
-</a>
 </body>
 </html>
