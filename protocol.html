@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Protocol – Dream Keys Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      background-color: #f4ede0;
+      background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+      font-family: 'EB Garamond', Georgia, serif;
+      color: #2c2216;
+      padding: 2.5em 1.5em;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    .page-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .site-header {
+      padding-bottom: 1.2em;
+      margin-bottom: 2em;
+      border-bottom: 2px solid #c8b89a;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1em;
+      flex-wrap: wrap;
+    }
+
+    .institute-name {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.68em;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #7a5c38;
+      line-height: 1.6;
+    }
+
+    .archive-ref {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.68em;
+      color: #7a5c38;
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    .site-title {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 1.85em;
+      font-weight: 700;
+      margin-top: 0.5em;
+      letter-spacing: -0.01em;
+    }
+
+    nav {
+      margin-top: 0.75em;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.79em;
+    }
+
+    nav a {
+      color: #5a3e28;
+      text-decoration: none;
+      padding-bottom: 1px;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav a:hover, nav a.active { border-bottom-color: #8b6f47; }
+
+    nav .sep {
+      margin: 0 0.5em;
+      color: #c8b89a;
+      user-select: none;
+    }
+
+    /* ── Document ── */
+    .doc-header {
+      border: 1px solid #c8b89a;
+      padding: 1.4em 1.6em;
+      margin-bottom: 2.5em;
+      background: rgba(200,184,154,0.08);
+    }
+
+    .doc-title {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 1.25em;
+      font-weight: 700;
+      margin-bottom: 0.3em;
+    }
+
+    .doc-subtitle {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.76em;
+      color: #8b6f47;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.8em;
+    }
+
+    .doc-meta {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.75em;
+      color: #7a5c38;
+      line-height: 1.8;
+    }
+
+    .doc-section {
+      margin-bottom: 2.4em;
+    }
+
+    .doc-section h2 {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 1.08em;
+      font-weight: 700;
+      border-bottom: 1px solid #c8b89a;
+      padding-bottom: 0.25em;
+      margin-bottom: 0.8em;
+      letter-spacing: 0.01em;
+    }
+
+    .doc-section h3 {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.85em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #6a4a28;
+      margin: 1.2em 0 0.4em;
+    }
+
+    .doc-section p {
+      margin-bottom: 0.85em;
+      font-size: 1.0em;
+    }
+
+    .doc-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .redacted {
+      background: #2c2216;
+      color: #2c2216;
+      border-radius: 1px;
+      user-select: none;
+    }
+
+    .protocol-step {
+      display: flex;
+      gap: 1em;
+      margin-bottom: 0.8em;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.82em;
+      color: #8b6f47;
+      min-width: 2em;
+      padding-top: 0.1em;
+      flex-shrink: 0;
+    }
+
+    .step-text {
+      font-size: 1.0em;
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.78em;
+      margin: 1em 0;
+    }
+
+    .results-table th {
+      text-align: left;
+      border-bottom: 2px solid #c8b89a;
+      padding: 0.4em 0.6em;
+      color: #5a3e28;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .results-table td {
+      padding: 0.4em 0.6em;
+      border-bottom: 1px solid #ddd0bc;
+      color: #2c2216;
+    }
+
+    .results-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .footnote-block {
+      border-top: 1px solid #c8b89a;
+      margin-top: 2em;
+      padding-top: 0.8em;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.72em;
+      color: #7a5c38;
+      line-height: 1.7;
+    }
+
+    .footnote-block p {
+      margin-bottom: 0.5em;
+    }
+
+    .site-footer {
+      border-top: 1px solid #c8b89a;
+      margin-top: 3.5em;
+      padding-top: 1.2em;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.71em;
+      color: #8b6f47;
+      text-align: center;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="site-header">
+    <div class="header-top">
+      <div class="institute-name">
+        Czechoslovak Institute for Psychophysiological Research<br>
+        Department of Symbolic Cognition &amp; Dream Studies · Prague
+      </div>
+      <div class="archive-ref">
+        Ref. No.: CIPR/DK/P-1967<br>
+        Classification: Internal Use Only
+      </div>
+    </div>
+    <h1 class="site-title">Research Protocol</h1>
+    <nav>
+      <a href="index.html">Card Index</a>
+      <span class="sep">·</span>
+      <a href="notes.html">Field Notes</a>
+      <span class="sep">·</span>
+      <a href="protocol.html" class="active">Protocol</a>
+      <span class="sep">·</span>
+      <a href="subjects.html">Subjects</a>
+    </nav>
+  </header>
+
+  <div class="doc-header">
+    <div class="doc-subtitle">Working Draft — Not for External Distribution</div>
+    <div class="doc-title">Dream Keys: A Symbolic Induction Protocol for Nocturnal Information Transfer</div>
+    <div class="doc-meta">
+      Author: D.U.U. Robinson, in collaboration with Prof. V. Horáček<br>
+      Prepared for: Czechoslovak Institute for Psychophysiological Research<br>
+      Date: September 1967 &nbsp;·&nbsp; Version: 2.3 (revised following Spring 1967 trials)<br>
+      Pages: 14 (archive transcription — partial; see note below)
+    </div>
+  </div>
+
+  <!-- ── Abstract ── -->
+  <div class="doc-section">
+    <h2>Abstract</h2>
+    <p>This document describes the theoretical basis, stimulus materials, procedural methodology, and preliminary outcome measures for a study investigating whether concentrated pre-sleep exposure to symbolic imagery can facilitate the nocturnal transfer of concrete, verifiable information into conscious awareness upon waking. The specific target information type is numeric: the position of a designated playing card within a shuffled fifty-two-card deck. The study hypothesises that a subject who has studied a carefully selected symbolic image paired with a specific card may, during subsequent sleep, unconsciously process information about that card's position and recover it — in approximate or exact form — through dream recall the following morning.</p>
+    <p>The protocol presented here reflects two years of iterative pilot testing and should be understood as a working document. Sections marked [pending review] reflect areas in which the methodology continues to evolve. Results to date suggest a statistically marginal but directionally consistent effect in a subset of subjects. Full statistical documentation is available from the Institute's data archive upon request. This working draft is not to be reproduced or distributed without written authorisation from the principal investigator.</p>
+  </div>
+
+  <!-- ── Theory ── -->
+  <div class="doc-section">
+    <h2>1. Theoretical Background</h2>
+
+    <h3>1.1 Hypnagogic Processing and Symbolic Anchors</h3>
+    <p>The hypnagogic state — the transitional period between waking and sleep — is characterised by heightened receptivity to imagery and a loosening of ordinary associative constraints. Research in this area (see References) suggests that stimuli presented immediately before sleep onset may be processed with unusual depth and retained in forms that differ structurally from waking-state memory. The Dream Keys protocol exploits this property by presenting subjects with a visually rich symbolic image in the forty-five minutes prior to sleep onset, with the intention of establishing what this document terms a "symbolic anchor" — a stable cognitive reference point that persists into, and through, the sleeping state.</p>
+
+    <h3>1.2 The Remote Cognition Framework</h3>
+    <p>The theoretical model underlying this study draws, with significant modification, from remote cognition research originating in <span class="redacted">several institutions whose work was made available to this team in summary form in 1965 via [redacted]</span>. The core proposition of that research is that certain individuals, under certain conditions, are able to access information about external physical states through mechanisms that do not involve ordinary sensory channels. Our interest is narrower and more falsifiable: we do not claim that subjects can perceive information they have never had access to, but rather that information they hold implicitly — in this case, information about a card's position, which can theoretically be derived from unconscious pattern recognition during handling — can be surfaced and structured during sleep through appropriate symbolic priming.</p>
+
+    <h3>1.3 The Symbolic Anchor Hypothesis</h3>
+    <p>The specific hypothesis is as follows: (a) each card in a standard playing deck has, for any given individual, a characteristic associative profile — a set of emotional, spatial, and numerical connotations shaped by familiarity and cultural encoding; (b) a carefully designed symbolic image can activate this associative profile more reliably and more deeply than direct visual presentation of the card itself; (c) activation of the associative profile at sleep onset primes the dreaming mind to seek out corresponding structural information — in this case, a number between 1 and 52 — and to present that information in dream content. The image is not a mnemonic for the number; it is a key that opens a door the mind has already built.</p>
+  </div>
+
+  <!-- ── Stimulus ── -->
+  <div class="doc-section">
+    <h2>2. Stimulus Material — Card Symbol Selection</h2>
+    <p>The development of the fifty-two symbolic images constituting the Dream Keys stimulus set was a collaborative process involving the principal investigator, the Institute's visual research unit, and two external consultants with backgrounds in Jungian imagery analysis. The selection criteria were as follows:</p>
+    <div class="protocol-step"><span class="step-num">i.</span><span class="step-text">Images must be surreal and emotionally resonant, but not distressing. They should produce a sense of mild wonder or strangeness rather than fear or anxiety, as the latter states are associated with disrupted sleep architecture and may interfere with the target mechanism.</span></div>
+    <div class="protocol-step"><span class="step-num">ii.</span><span class="step-text">Images must be spatially anchored — they should depict a clearly defined environment or location, rather than abstract or purely symbolic content. Pilot testing confirmed that spatially grounded images produce more stable cognitive anchors than abstract ones.</span></div>
+    <div class="protocol-step"><span class="step-num">iii.</span><span class="step-text">Images must be unique. No two images in the set may share a dominant visual element (e.g., two images featuring a staircase as their primary feature are not permitted, though staircases may appear as secondary elements).</span></div>
+    <div class="protocol-step"><span class="step-num">iv.</span><span class="step-text">Images must be pilot-tested for emotional stability across at least five subjects before inclusion in the permanent set. Images producing highly variable responses (subjects rating emotional impact in widely divergent ways) are revised or replaced.</span></div>
+    <p>Twelve images from the original set were revised following the first trial phase; see Field Note Entry #017 for details. The complete current set is archived in the <a href="index.html" style="color:#5a3e28;">Stimulus Archive</a>.</p>
+  </div>
+
+  <!-- ── Induction ── -->
+  <div class="doc-section">
+    <h2>3. Induction Protocol</h2>
+    <p>The following procedure is to be followed for each experimental session. Deviation from this procedure must be documented in the session record and flagged for the principal investigator's review.</p>
+
+    <h3>3.1 Pre-Session Preparation</h3>
+    <div class="protocol-step"><span class="step-num">1.</span><span class="step-text">The session administrator selects the assigned card for the evening from the master assignment schedule, which is generated in advance and held under seal by the principal investigator. The administrator does not communicate the card identity to any other team member present during the subject session.</span></div>
+    <div class="protocol-step"><span class="step-num">2.</span><span class="step-text">The corresponding stimulus image is prepared for presentation. Images are printed on matte card stock (12 × 18 cm) and stored in individual opaque envelopes. The subject receives the envelope and opens it in the session room; no other party is present at the moment of first viewing.</span></div>
+    <div class="protocol-step"><span class="step-num">3.</span><span class="step-text">The session room is prepared: ambient light at reading level; no music or extraneous audio; a glass of water and the subject's dream journal placed on the bedside table. A clock is visible from the bed but positioned so as not to be the first object the subject sees upon waking.</span></div>
+
+    <h3>3.2 Image Concentration Exercise</h3>
+    <div class="protocol-step"><span class="step-num">4.</span><span class="step-text">The subject studies the image for a minimum of fifteen minutes. They are instructed to examine the image slowly, to attend to each element in turn, and to allow any emotional or associative responses to arise without suppression or analysis. They are not asked to memorise the image or to think about numbers.</span></div>
+    <div class="protocol-step"><span class="step-num">5.</span><span class="step-text">The image card is placed face-down on the bedside table after the concentration period. The subject may look at it again before sleep if they wish, but are not required to do so. The image is not removed from the room.</span></div>
+    <div class="protocol-step"><span class="step-num">6.</span><span class="step-text"><span class="redacted">Steps 6a through 6c, relating to supplementary audio induction, have been removed from this version of the protocol pending ethics review of the Red Door trial results (see Field Note Entry #047). These steps are available in Protocol Version 2.1 held in the Institute's restricted archive.</span></span></div>
+
+    <h3>3.3 Dream Journaling</h3>
+    <div class="protocol-step"><span class="step-num">7.</span><span class="step-text">Upon waking, the subject writes in their dream journal immediately, before speaking to any other person or consulting any external material. The journal is structured: subjects record the time of waking, a free narrative of dream content, and then respond to four prompts: (a) Were any numbers present, named, or implied in the dream? (b) Were any spatial positions — e.g., first, last, middle, a specific location in a sequence — featured? (c) Was the image from the previous evening present in the dream in any form? (d) Was any person or figure counting, ordering, or arranging objects?</span></div>
+    <div class="protocol-step"><span class="step-num">8.</span><span class="step-text">The journal is submitted to the session administrator before the subject is given any feedback. Under no circumstances is the subject informed of the assigned card identity or position before the journal has been collected and sealed. Violation of this procedure invalidates the session record.</span></div>
+  </div>
+
+  <!-- ── Scoring ── -->
+  <div class="doc-section">
+    <h2>4. Scoring and Verification Criteria</h2>
+    <p>Session outcomes are classified across four categories:</p>
+    <table class="results-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Criteria</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Full Match</td>
+          <td>Subject reports exact card identity and exact position (±0).</td>
+        </tr>
+        <tr>
+          <td>Partial Match — Identity</td>
+          <td>Subject correctly identifies card suit or value independently, without position data.</td>
+        </tr>
+        <tr>
+          <td>Partial Match — Position</td>
+          <td>Subject reports a number within ±3 of the card's true position; card identity not recalled.</td>
+        </tr>
+        <tr>
+          <td>Near Match</td>
+          <td>Subject reports a number within ±5; or reports thematic content consistent with the suit family (e.g., geometric imagery associated with Diamonds) without specific identification.</td>
+        </tr>
+        <tr>
+          <td>No Match</td>
+          <td>No correspondence between journal content and card identity or position under any of the above criteria.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>All scoring decisions are made by two independent reviewers working from the sealed journal record. In cases of disagreement, the session is reviewed by the principal investigator, whose decision is final. Sessions in which the procedure was deviated from are excluded from the summary statistics regardless of content.</p>
+  </div>
+
+  <!-- ── Results ── -->
+  <div class="doc-section">
+    <h2>5. Preliminary Results — Summary (as of June 1967)</h2>
+    <p>At the time of this draft's preparation, the study had completed 89 valid sessions across two subject cohorts (A and K). Results are summarised below. Full session records are available from the Institute's data archive.</p>
+    <table class="results-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Sessions (n)</th>
+          <th>% of Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Full Match</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        <tr>
+          <td>Partial Match — Identity</td>
+          <td>3</td>
+          <td>3.4%</td>
+        </tr>
+        <tr>
+          <td>Partial Match — Position</td>
+          <td>6</td>
+          <td>6.7%</td>
+        </tr>
+        <tr>
+          <td>Near Match</td>
+          <td>14</td>
+          <td>15.7%</td>
+        </tr>
+        <tr>
+          <td>No Match</td>
+          <td>66</td>
+          <td>74.2%</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>The near-match rate of 15.7% is <span class="redacted">approximately 2.4 times above the expected baseline under the null hypothesis as modelled by Horáček (see Statistical Annex B, currently withheld)</span>. The principal investigator considers this result sufficiently interesting to warrant the continuation of the study and the expansion of the subject cohort planned for autumn 1967. It does not constitute proof of the hypothesised mechanism.</p>
+    <p>A note on the absence of full matches: the team does not consider this surprising at this stage of the study. The protocol is still being refined, the subject pool is small, and the conditions under which the mechanism — if it exists — might produce its most reliable results are not yet understood. The goal of the current phase is to establish whether the signal is real; quantifying and optimising it is a question for later work.</p>
+  </div>
+
+  <!-- ── Ethics ── -->
+  <div class="doc-section">
+    <h2>6. Ethical Considerations and Limitations</h2>
+    <p>All subjects participate voluntarily and may withdraw at any time without consequence. Subjects are not informed of the card-position hypothesis prior to participation; they are told only that the study concerns symbolic imagery and sleep. Full disclosure is provided at the conclusion of participation (debrief protocol version 2.0). The ethics panel of the Institute reviewed and approved this consent structure in July 1966.</p>
+    <p>The principal investigator acknowledges the following limitations of the current protocol: (a) the sample size is insufficient for strong statistical inference; (b) the scoring criteria, while conservative, involve subjective judgment at the level of dream interpretation; (c) demand characteristics cannot be entirely excluded, despite the structural safeguards built into the journaling procedure; (d) the theoretical mechanism proposed is not currently testable by any means available to this team, meaning that a positive result cannot be explained, only documented.</p>
+    <p>The study does not involve deception beyond the withholding of hypothesis information, which is judged necessary for the validity of the results and is disclosed at debrief. No physical interventions are made; all sessions involve only visual and, in certain trials, auditory stimulation at levels judged to be well within safe parameters. <span class="redacted">Concerns raised by Subject M-11 regarding intrusive imagery following Session 034 have been reviewed by the ethics panel; no formal finding of harm was made. M-11's subsequent withdrawal is recorded in Field Note Entry #038.</span></p>
+  </div>
+
+  <!-- ── Appendix ── -->
+  <div class="doc-section">
+    <h2>Appendix A — Note on the Stimulus Archive</h2>
+    <p>The complete set of fifty-two symbolic image descriptions, as finalised following the Spring 1967 revision, is maintained in the Dream Keys Stimulus Archive, accessible via the <a href="index.html" style="color:#5a3e28;">Card Index</a>. The archive presents each card and its paired image description in the format used during experimental sessions. The descriptions are the authoritative record of the stimulus material; printed card stock versions used in sessions were produced directly from these descriptions.</p>
+    <p>The archive is indexed by suit and rank (Hearts, Spades, Diamonds, Clubs; Ace through King within each suit), with each entry assigned a reference number (DK-001 through DK-052) corresponding to its position in the master ordering used for scoring purposes. Researchers requiring access to the original printed card stock should contact the Institute's materials archive directly.</p>
+  </div>
+
+  <div class="footnote-block">
+    <p>¹ This document is a partial transcription. Pages 7–10 (Sections 3.2.6–3.2.9 and Appendix B: Statistical Methodology) are held in the Institute's restricted archive and are not included here.</p>
+    <p>² Version history: v1.0 — March 1966 (initial draft); v2.0 — November 1966 (post-cohort-A revision); v2.1 — April 1967 (audio induction addendum); v2.3 — September 1967 (current; audio addendum suspended pending review).</p>
+    <p>³ This document is marked for retention indefinitely per the Project Closure Notice of May 1970 (Field Note Entry #094).</p>
+  </div>
+
+  <footer class="site-footer">
+    Archived by D.U.U. Robinson &nbsp;·&nbsp; Czechoslovak Institute for Psychophysiological Research &nbsp;·&nbsp; Prague, 1970<br>
+    Digital transcription: 2003. Repository maintained by the Robinson Estate.
+  </footer>
+
+</div>
+</body>
+</html>

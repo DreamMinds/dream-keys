@@ -3,118 +3,524 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Research Notes – Dream Keys</title>
+  <title>Field Notes – Dream Keys Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
     body {
-      background: #fdf6e3 url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-      font-family: 'Courier New', Courier, monospace;
-      color: #333;
-      padding: 2em;
+      background-color: #f4ede0;
+      background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+      font-family: 'EB Garamond', Georgia, serif;
+      color: #2c2216;
+      padding: 2.5em 1.5em;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    .page-wrap {
       max-width: 800px;
-      margin: auto;
+      margin: 0 auto;
+    }
+
+    .site-header {
+      padding-bottom: 1.2em;
+      margin-bottom: 2em;
+      border-bottom: 2px solid #c8b89a;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1em;
+      flex-wrap: wrap;
+    }
+
+    .institute-name {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.68em;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #7a5c38;
       line-height: 1.6;
     }
-    h1 {
-      text-align: center;
-      font-size: 1.8em;
-      margin-bottom: 1.5em;
+
+    .archive-ref {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.68em;
+      color: #7a5c38;
+      text-align: right;
+      line-height: 1.6;
     }
-    .note {
+
+    .site-title {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 1.85em;
+      font-weight: 700;
+      margin-top: 0.5em;
+      letter-spacing: -0.01em;
+    }
+
+    nav {
+      margin-top: 0.75em;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.79em;
+    }
+
+    nav a {
+      color: #5a3e28;
+      text-decoration: none;
+      padding-bottom: 1px;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav a:hover, nav a.active { border-bottom-color: #8b6f47; }
+
+    nav .sep {
+      margin: 0 0.5em;
+      color: #c8b89a;
+      user-select: none;
+    }
+
+    /* ── Notes ── */
+    .section-intro {
+      font-size: 0.96em;
+      color: #4a3728;
       margin-bottom: 2.5em;
-      border-left: 3px solid #aaa;
+      font-style: italic;
+      border-left: 3px solid #c8b89a;
       padding-left: 1em;
     }
-    .note-title {
-      font-weight: bold;
-      margin-bottom: 0.4em;
+
+    .note-entry {
+      margin-bottom: 2.8em;
+      padding-bottom: 2.2em;
+      border-bottom: 1px solid #ddd0bc;
     }
-    .note img {
-      max-width: 60%;
+
+    .note-entry:last-of-type {
+      border-bottom: none;
+    }
+
+    .note-meta {
+      margin-bottom: 0.7em;
+    }
+
+    .entry-num {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.76em;
+      color: #8b6f47;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-right: 0.6em;
+    }
+
+    .entry-title {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-size: 1.05em;
+      font-weight: 700;
+      color: #2c2216;
+    }
+
+    .entry-details {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.72em;
+      color: #a07a50;
+      margin-top: 0.25em;
+      letter-spacing: 0.02em;
+    }
+
+    .note-body {
+      font-size: 1.0em;
+      color: #2c2216;
+    }
+
+    .note-body p {
+      margin-bottom: 0.85em;
+    }
+
+    .note-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .note-body .note-img {
+      max-width: 55%;
       display: block;
-      margin: 0.5em auto;
-      border: 1px solid #999;
+      margin: 1em auto;
+      border: 1px solid #b09070;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.12);
     }
-    .footer {
+
+    .note-img-caption {
       text-align: center;
-      margin-top: 3em;
-      font-size: 0.9em;
-      color: #666;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.72em;
+      color: #8b6f47;
+      margin-top: 0.3em;
+      font-style: italic;
     }
-    a.back {
-      display: block;
+
+    .redacted {
+      background: #2c2216;
+      color: #2c2216;
+      border-radius: 1px;
+      user-select: none;
+    }
+
+    .cross-ref {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.78em;
+      color: #7a5c38;
+      font-style: italic;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      border-top: 1px solid #c8b89a;
+      margin-top: 3.5em;
+      padding-top: 1.2em;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.71em;
+      color: #8b6f47;
       text-align: center;
-      margin-top: 2em;
-      text-decoration: underline;
-      color: #444;
-      font-size: 1em;
+      line-height: 1.8;
     }
   </style>
 </head>
 <body>
-  <h1>Field Notes: Prague 1967–1969</h1>
+<div class="page-wrap">
 
-  <div class="note">
-    <div class="note-title">Entry #004 – Initial Symbol Induction</div>
-    <p>
-      Trials with subjects exposed to card imagery prior to sleep suggest subconscious pattern sensitivity. Card #7 ("The Staircase of Red Birds") produced recurring dream themes across participants, notably references to "counting" and "ascending." May indicate partial symbolic encoding.
-    </p>
-  </div>
+  <header class="site-header">
+    <div class="header-top">
+      <div class="institute-name">
+        Czechoslovak Institute for Psychophysiological Research<br>
+        Department of Symbolic Cognition &amp; Dream Studies · Prague
+      </div>
+      <div class="archive-ref">
+        Ref. No.: CIPR/DK/FN-II<br>
+        Classification: Internal Use Only
+      </div>
+    </div>
+    <h1 class="site-title">Field Notes: Prague, 1965–1970</h1>
+    <nav>
+      <a href="index.html">Card Index</a>
+      <span class="sep">·</span>
+      <a href="notes.html" class="active">Field Notes</a>
+      <span class="sep">·</span>
+      <a href="protocol.html">Protocol</a>
+      <span class="sep">·</span>
+      <a href="subjects.html">Subjects</a>
+    </nav>
+  </header>
 
-  <div class="note">
-    <div class="note-title">Entry #009 – Group Dream Correlation</div>
-    <p>
-      Three subjects reported numeric sequences in the same dream cycle after focusing on Card #13 ("The Window with No View"). Numbers were inconsistent but clustered around mid-deck values. Further control testing planned.
-    </p>
-  </div>
+  <p class="section-intro">The following records are transcriptions of handwritten field notes kept by the research team throughout the duration of the Dream Keys study. Entries are numbered non-consecutively; gaps reflect notes lost during the 1970 transfer of materials, or documents withheld under standing advisory. Observations are those of the recording researcher and do not constitute official findings of the Institute.</p>
 
-  <div class="note">
-    <div class="note-title">Entry #021 – Link to Remote Viewing</div>
-    <p>
-      A visiting U.S. liaison mentioned similarity to early remote cognition experiments. Possible crossover interest from defense sector. Ethics concerns raised, but no official inquiry. Keep notes vague in final report.
-    </p>
-  </div>
+  <!-- ── Entry 001 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #001</span>
+      <span class="entry-title">Project Inception — Rationale and Scope</span>
+      <div class="entry-details">Prague, 3 September 1965 · Researcher: D.U.U. Robinson</div>
+    </div>
+    <div class="note-body">
+      <p>The proposal submitted to the Institute in August of this year outlined a study to determine whether concentrated exposure to a discrete symbolic image, administered in the hours immediately preceding sleep, could influence a subject's subconscious processing in ways that produce retrievable, structured information upon waking. The motivating question is narrow: not whether dreams carry meaning in the broad psychological sense, but whether information of a concrete and verifiable kind — such as a position, a number, a sequence — can be encoded via symbol and recovered intact.</p>
+      <p>The card deck was chosen as the target medium on the recommendation of Prof. V. Horáček, who argued that its combinatorial properties (52 elements, each with a fixed and universally understood identity) provide an ideal ground-truth against which dream recall can be measured without interpretive ambiguity. A subject either recalls the correct card or does not. There is no partial credit, and no analyst is needed to adjudicate.</p>
+      <p>Stimulus images are to be developed collaboratively between myself and the visual research unit. Criteria for image selection will be discussed in the protocol documentation. First trials are planned for the spring cohort, 1966.</p>
+    </div>
+  </article>
 
-  <div class="note">
-    <div class="note-title">Entry #034 – Mirror and Spiral Stimulation</div>
-    <p>
-      Subjects exposed to alternating spiral and mirror imagery exhibited increased theta wave activity. One subject described a "humming oval" in their dream matching the induction symbol. Others reported being "watched" from behind their own reflections.
-    </p>
-  </div>
+  <!-- ── Entry 004 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #004</span>
+      <span class="entry-title">Initial Symbol Induction — First Trial Observations</span>
+      <div class="entry-details">Prague, 14 February 1966 · Subject Cohort: A (n=8) · Lead: Robinson</div>
+    </div>
+    <div class="note-body">
+      <p>Trials with subjects exposed to card imagery prior to sleep suggest a meaningful degree of subconscious pattern sensitivity. Subjects were each given a single card image (printed on matte card stock, 12×18 cm) and asked to study it for no fewer than fifteen minutes before retiring. No other instructions were given. Dream journals were collected the following morning.</p>
+      <p>Card #7 — the image subsequently titled "The Staircase of Red Birds" — produced recurring dream themes across four of the eight participants, notably references to counting and ascending. One subject (A-3) described an experience of "climbing stairs and knowing, at each step, that I was counting something I couldn't name." Another (A-7) spoke of birds arriving in groups and "the feeling of keeping tally." Whether this constitutes symbolic encoding or convergent imagery remains to be established.</p>
+      <p>The remaining four subjects reported no obviously image-related content, though two noted unusually vivid and fragmented dreams, which may indicate heightened REM activity. Baseline journal entries have been filed separately. Further control testing is planned for March.</p>
+    </div>
+  </article>
 
-  <div class="note">
-    <div class="note-title">Entry #047 – Audio Loop (Red Door Protocol)</div>
-    <p>
-      Subjects were played a whisper loop of the phrase “find the red door” beneath white noise. Four reported encountering a red door within dream sequences — often at the end of distorted hallways. One claimed: “It wouldn't open until I spoke.”
-    </p>
-  </div>
+  <!-- ── Entry 009 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #009</span>
+      <span class="entry-title">Group Dream Correlation — Mid-Cycle Review</span>
+      <div class="entry-details">Prague, 7 May 1966 · Subject Cohort: A (n=8) · Lead: Robinson, assist. Horáček</div>
+    </div>
+    <div class="note-body">
+      <p>Three subjects reported numeric sequences within the same dream cycle after focusing on Card #13, the image now designated "The Window with No View." The numbers were inconsistent in value but clustered, in each case, around a mid-range position in the deck (values reported: 24, 27, and 26). The theoretical target position for this card in the standard ordering used by the study is 26. The clustering is statistically interesting but not yet conclusive; with a sample of three, the probability of mid-range clustering by chance remains within acceptable bounds.</p>
+      <p>Horáček suggests that the window image — specifically its blank, curtained quality — may be generating a "positional anchor" in subjects rather than a numeric one; that is, the subjects may be intuiting something like "middle" or "halfway" rather than the specific value 26. This would be consistent with the imagery, but would represent a fundamentally different mechanism than the one we are testing for. Further control testing with adjacent cards is planned to disambiguate.</p>
+      <p>A fourth subject in this cohort (A-6) reported a dream involving "a clock with no hands on a white wall," which the team considers potentially related to the Window image but did not involve any numeric content. It has been logged as a partial symbolic match, pending review criteria to be established in the protocol revision.</p>
+    </div>
+  </article>
 
-  <div class="note">
-    <div class="note-title">Entry #053 – Chessboard Projection (Discontinued)</div>
-    <p>
-      An experimental chess set with altered rules was placed beside sleeping participants. Subjects who memorized game states reported dreams of self-competition. No strategic consistency. The project was retired due to ambiguous results and high subject frustration.
-    </p>
-  </div>
+  <!-- ── Entry 012 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #012</span>
+      <span class="entry-title">Second Trial Cohort — Assembly and Briefing</span>
+      <div class="entry-details">Prague, 2 September 1966 · Subject Cohort: K (n=12) · Lead: Robinson</div>
+    </div>
+    <div class="note-body">
+      <p>A second cohort of twelve subjects has been assembled for the autumn trials. Subjects range in age from 22 to 58. Four are student volunteers recruited through the university; the remainder were referred by the Institute's clinical affiliate. All have been screened for sleep disorders, and none report recurring nightmares or medicated sleep in the preceding six months. All signed the amended consent document (version 2.1) reviewed by the ethics panel in July.</p>
+      <p>The briefing held this morning covered: the nature of the stimulus material (described in neutral terms as "imagery study"), the journaling requirements, and the return schedule. Subjects were not told the card-position hypothesis, as the protocol requires naïve participation. Two subjects asked whether they might "accidentally ruin" the study by trying to dream about numbers deliberately; they were informed that intentional effort is neither required nor harmful, but that the images should be examined naturally, without analytical overlay.</p>
+      <p>Subject K-7 expressed immediate and articulate interest in the mechanics of the study, asked several perceptive questions about the selection of imagery, and was noted by the team as a candidate for closer monitoring. Her background in music — she is a conservatory student — may be relevant given the earlier observations about rhythmic and sequential dream content.</p>
+    </div>
+  </article>
 
-  <div class="note">
-    <div class="note-title">Entry #056 – Fractal Overlay Hypnosis</div>
-    <p>
-      Projection of a prime-based fractal pattern above the bed led to architectural dreamscapes — subjects spoke of nested rooms, recursive stairwells, and “houses within houses.” One sketched a room he claimed was “infinitely folding inward.”
-    </p>
-    <img src="sketch.png" alt="Fractal pattern sketch (entry #056)">
-  </div>
+  <!-- ── Entry 017 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #017</span>
+      <span class="entry-title">Symbol Design Review — Revised Image Set</span>
+      <div class="entry-details">Prague, 19 November 1966 · Lead: Robinson, Visual Unit</div>
+    </div>
+    <div class="note-body">
+      <p>Following the initial trial phase, twelve of the fifty-two original images have been revised. The revision criteria were: (a) images that produced no statistically distinguishable dream content across multiple trials; (b) images that were reported as distressing or sleep-disruptive in a manner inconsistent with the study's aims; and (c) images in which the visual logic was judged, in retrospect, to be too abstract to form a stable cognitive anchor.</p>
+      <p>The revised images retain the surreal and emotionally resonant qualities of the originals but place greater emphasis on spatial containment — enclosed rooms, bodies of water, bounded landscapes — on the hypothesis that spatially anchored imagery may be more reliably encoded during sleep onset. The complete revised set is documented in the Stimulus Archive. All subjects in Cohort K will receive the revised materials from Session 5 onward; Cohort A has concluded.</p>
+    </div>
+  </article>
 
-  <div class="note">
-    <div class="note-title">Entry #063 – Non-Card Archetype Trigger</div>
-    <p>
-      A velvet envelope containing a single gold thread was given to Participant A before sleep. The next day, they described dreaming of a puppet theater lit from beneath. The puppets were speaking in reversed Czech. No memory of the message remained upon waking.
-    </p>
-    <img src="notebook_scan.png" alt="Archetype Trigger (entry #063)">
-  </div>
+  <!-- ── Entry 021 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #021</span>
+      <span class="entry-title">Link to Remote Viewing — External Liaison Visit</span>
+      <div class="entry-details">Prague, 8 March 1967 · Lead: Robinson · Visitor: unnamed U.S. attaché</div>
+    </div>
+    <div class="note-body">
+      <p>A visiting liaison — introduced only by affiliation, not by name — attended Tuesday's session review and raised what he described as "obvious parallels" to research being conducted concurrently at institutions he declined to specify. He made reference to "remote cognition protocols" involving similar principles: image-seeded nocturnal processing used to surface concrete external information.</p>
+      <p>The methodological overlap is real, though the purposes differ in ways that seem significant to us. The referenced programmes, as best as I could understand from the conversation, are concerned with operational intelligence — the location of objects or personnel. Our interest remains purely theoretical: whether the mechanism exists at all, and if so, what determines its reliability. Whether results from either programme would be made available to the other was left deliberately vague. I have noted the conversation for the record but do not expect institutional follow-up.</p>
+      <p>Ethics concerns were raised informally by Horáček after the visitor departed. No official inquiry has been opened. I have been advised to keep these field notes vague regarding any discussions involving external parties. <span class="cross-ref">[See also Entry #086 and Entry #089 regarding further external interest.]</span></p>
+    </div>
+  </article>
 
-  <div class="footer">
-    Last updated: March 1970 | Archived by D.U.U. Robinson
-  </div>
+  <!-- ── Entry 026 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #026</span>
+      <span class="entry-title">Card Symbol Stability Test</span>
+      <div class="entry-details">Prague, 4 June 1967 · Subject Cohort: K (n=10 active) · Lead: Robinson</div>
+    </div>
+    <div class="note-body">
+      <p>A subset of six Cohort K subjects were each given the same image on two non-consecutive nights (separated by five nights of standard rotation) without their knowledge. The question being tested: does a subject's dream response to a given image remain consistent over time, or does it shift as the image becomes familiar?</p>
+      <p>Results are preliminary but suggest moderate consistency. Three of the six subjects described recognisably similar dream themes on both exposure nights (not identical, but thematically related). Two showed no apparent connection between the two nights. One (K-11) reported experiencing what he called "the same dream, but reversed" — a description that proved difficult to interpret but which the team found sufficiently unusual to log in full. His journal entry for this night has been retained separately.</p>
+      <p>The implication, if the consistency holds in further tests, is that the symbolic encoding is subject-specific but stable — that is, a given image produces something like a characteristic response in a given individual, rather than one that varies randomly night to night. This would significantly simplify the eventual scoring methodology.</p>
+    </div>
+  </article>
 
-  <a href="index.html" class="back">← Return to Dream Keys</a>
+  <!-- ── Entry 034 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #034</span>
+      <span class="entry-title">Mirror and Spiral Stimulation — EEG Monitoring Session</span>
+      <div class="entry-details">Prague, 29 October 1967 · Subject Cohort: K (n=6 monitored) · Lead: Horáček</div>
+    </div>
+    <div class="note-body">
+      <p>Six subjects underwent overnight monitoring with electroencephalographic equipment borrowed from the Institute's affiliated clinic. The session targeted two image types: alternating spiral patterns and mirror-surface imagery (still photographs of large mirrors at various angles, with the subject's face not included in the frame). The intention was to observe whether particular image categories produce measurable differences in sleep-phase distribution.</p>
+      <p>Subjects exposed to alternating spiral and mirror imagery exhibited increased theta wave activity in the range of 4–7 Hz, particularly in the 90-minute window following sleep onset. Theta elevation of this kind is consistent with heightened hypnagogic engagement, and may indicate that the images were being actively processed rather than simply registered and forgotten. One subject (K-7) demonstrated theta activity that remained notably elevated well into the second sleep cycle — an unusual pattern which the attending clinician commented on without prompting.</p>
+      <p>Regarding dream content: the most striking report came from K-4, who described "being watched from behind my own reflection." He was agitated during the journal session and asked to be assigned different imagery for the following week. His request was granted. K-7 described a "humming oval" in her dream that she identified, when shown the stimulus materials again the following morning, as matching the spiral image "almost exactly, but made of sound rather than light." Others reported being "observed" from behind their own reflections — a theme recurring independently across three subjects.</p>
+    </div>
+  </article>
+
+  <!-- ── Entry 038 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #038</span>
+      <span class="entry-title">Participant Dropout — Cohort K Review</span>
+      <div class="entry-details">Prague, 15 January 1968 · Lead: Robinson</div>
+    </div>
+    <div class="note-body">
+      <p>Two participants have withdrawn from Cohort K since the autumn monitoring session. K-4 cited "sleep difficulties unrelated to the study" — though his journal entries from October suggest the mirror-imagery sessions were a contributing factor. He was debriefed and released without incident. K-9 withdrew citing scheduling conflicts; the team considers this genuine.</p>
+      <p>The study continues with ten active participants. Dropout rate at this stage (two of twelve, 16.7%) is within expected bounds for a study of this duration and intensity. The ethics panel has been notified of both withdrawals as required. No adverse events have been formally recorded.</p>
+    </div>
+  </article>
+
+  <!-- ── Entry 042 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #042</span>
+      <span class="entry-title">Induction Duration Study</span>
+      <div class="entry-details">Prague, 12 March 1968 · Subject Cohort: K (n=10) · Lead: Robinson</div>
+    </div>
+    <div class="note-body">
+      <p>Subjects were divided into two groups and given different induction durations: Group I viewed the assigned image for eight minutes; Group II for twenty minutes. All other conditions were held constant. Dream journals were collected at 6:30 the following morning.</p>
+      <p>No statistically significant difference was observed between the two groups in terms of image-related dream content. This result, if replicated, would suggest that the duration of pre-sleep image exposure above a minimum threshold does not increase the probability of symbolic encoding. The minimum threshold itself remains unestablished, and a follow-up trial using a one-minute exposure group is planned for April.</p>
+      <p>Horáček noted that this result may be confounded by inter-subject variability — the sample size is too small to rule out individual differences as the dominant factor. He recommends a within-subject design for the replication. Agreement reached; the April trial will use a crossover approach with a two-week washout period.</p>
+    </div>
+  </article>
+
+  <!-- ── Entry 047 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #047</span>
+      <span class="entry-title">Audio Loop — Red Door Protocol</span>
+      <div class="entry-details">Prague, 30 May 1968 · Subject Cohort: K (n=8) · Lead: Robinson, assist. technician J. Nedvěd</div>
+    </div>
+    <div class="note-body">
+      <p>A departure from strictly visual induction: subjects were played a recorded audio loop containing the whispered phrase "find the red door," repeated at eight-second intervals beneath a continuous white noise signal. The loop was played through a small speaker placed on the bedside table and ran for the duration of the subject's sleep. The spoken phrase was masked sufficiently by the white noise that no subject was able to identify it consciously during a post-session listening test at half-volume; at full volume, with the white noise removed, it was clearly audible to all. This confirms the signal was subliminal under sleeping conditions.</p>
+      <p>Results: four of the eight subjects reported encountering a red door within their dream sequences. In each case the door appeared at the terminal point of a corridor or hallway, often distorted in proportion or material. One subject described "a door made of old cloth, the colour of blood, at the end of a hallway that kept changing length." A second said, "I knew there was a red door somewhere, and the whole dream was the search — I never found it, but I was certain it was there." A third: "It wouldn't open until I spoke." When asked what they had spoken in the dream, they could not recall.</p>
+      <p>The four remaining subjects reported no red door imagery. Of these, two reported unusual spatial dreams — long corridors, repeating rooms — that may represent partial activation of the target motif without the terminal symbol. The distinction between full symbolic encoding and this kind of ambient spatial priming remains one of the study's open questions.</p>
+    </div>
+  </article>
+
+  <!-- ── Entry 053 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #053</span>
+      <span class="entry-title">Chessboard Projection — Discontinued</span>
+      <div class="entry-details">Prague, 14 August 1968 · Lead: Horáček</div>
+    </div>
+    <div class="note-body">
+      <p>An experimental chess set with altered rules was placed beside the sleeping participants: the queen moved only diagonally by one square; pawns could move backward; the board was rotated 45 degrees. Subjects spent 30 minutes learning and attempting to play the altered game before sleep, then retired with a photograph of the final board position left on the bedside table.</p>
+      <p>Subjects who memorised game states reported dreams of self-competition — playing against themselves, or against an opponent who was somehow simultaneously on both sides. No strategic consistency was found across subjects. The altered rule set produced frustration during the pre-sleep session in five of seven subjects, and this frustration appeared to carry into dream content, producing anxious rather than focused dream states. The project was retired due to ambiguous results and high subject frustration. The chess set has been returned to Horáček's office.</p>
+    </div>
+  </article>
+
+  <!-- ── Entry 056 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #056</span>
+      <span class="entry-title">Fractal Overlay Hypnosis — Spatial Dreamscapes</span>
+      <div class="entry-details">Prague, 5 November 1968 · Subject Cohort: K (n=7) · Lead: Robinson</div>
+    </div>
+    <div class="note-body">
+      <p>A prime-number-based fractal pattern was projected onto the ceiling above each subject's bed via a modified slide projector. The pattern was visible for approximately forty minutes after the room light was extinguished, after which the projector was timed to switch off automatically. The hypothesis was that a mathematically structured but aesthetically complex image, present at the edge of waking and sleep, might produce dream environments with unusual spatial properties.</p>
+      <p>Results strongly confirmed the architectural hypothesis. Six of the seven subjects described dreamscapes of unusual spatial complexity: nested rooms within rooms, recursive stairwells that descended into duplicates of themselves, buildings that the dreamer somehow understood to extend inward rather than outward. One subject spoke of "houses within houses, each one smaller and brighter than the last." Another described "a corridor that was also a sentence, and each door was a word I couldn't read."</p>
+      <p>Subject K-11, who had previously described the "reversed dream" phenomenon, produced the most extensive journal entry of the study so far: four handwritten pages describing an architectural environment of remarkable internal consistency, including a room he said he had visited "in a different order" in a previous dream. He claimed to have sketched a room he described as "infinitely folding inward." The sketch was retained by the research team.</p>
+      <img src="sketch.png" alt="Sketch from K-11's journal, Session 056 — 'Room folding inward'" class="note-img">
+      <p class="note-img-caption">Fig. 1 — Retained sketch from Subject K-11's journal, November 1968. Subject described the structure as 'a room that knows you are inside it.'</p>
+    </div>
+  </article>
+
+  <!-- ── Entry 063 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #063</span>
+      <span class="entry-title">Non-Card Archetype Trigger — Velvet Envelope Protocol</span>
+      <div class="entry-details">Prague, 3 February 1969 · Subject: K-7 (isolated trial) · Lead: Robinson</div>
+    </div>
+    <div class="note-body">
+      <p>A velvet envelope containing a single gold thread — no image, no text — was given to Subject K-7 before sleep, with the instruction to "hold it while falling asleep if you wish, or place it where you can see it." No further guidance was provided. The intention was to test whether a purely tactile or materially resonant object, without visual symbolic content, could function as a dream anchor.</p>
+      <p>K-7's dream journal the following morning described a puppet theater lit from beneath, with wooden puppets speaking in reversed Czech. She was able to recall several phrases clearly, though when she attempted to transcribe them phonetically, the resulting text did not correspond to any recognizable Czech words or sentence structures. She spent some time during the journaling session attempting to speak the phrases aloud, working from memory, and became visibly frustrated when she could not reproduce them accurately. The team did not attempt to decode the transcription.</p>
+      <p>No memory of any message survived waking. K-7's comment on the experience: "It felt like I was watching a recording of something that had already happened. Like subtitles for a film I hadn't seen." The gold thread was returned to her at the end of the session; she asked to keep it.</p>
+      <img src="notebook_scan.png" alt="Notebook scan — Archetype Trigger Protocol, Entry #063" class="note-img">
+      <p class="note-img-caption">Fig. 2 — Scan of Robinson's notebook, Entry #063. Phonetic transcription by Subject K-7 in lower margin.</p>
+    </div>
+  </article>
+
+  <!-- ── Entry 071 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #071</span>
+      <span class="entry-title">Numeric Surfacing in REM Phase</span>
+      <div class="entry-details">Prague, 18 May 1969 · Subject Cohort: K (n=9 active) · Lead: Robinson</div>
+    </div>
+    <div class="note-body">
+      <p>The central hypothesis of the study has now received its first direct, if partial, support. Three subjects in Cohort K reported spontaneous numeric content — specific integers, unprompted — in their dream journals following an evening of standard card-image induction. In each case the number reported fell within the range 1–52. In two of three cases, the reported number was within three positions of the true position of the assigned card in the standard ordering.</p>
+      <p>K-7 was one of the three. She reported dreaming of a market stall at which items were sold by number rather than by name, and described "knowing that I needed the thirty-fourth one." The card she had been assigned that evening occupies position 34 in the master ordering. She made no conscious connection between the number and the card during the journaling session, and appeared genuinely surprised when informed of the correspondence after the session closed.</p>
+      <p>The team is proceeding with care. The sample remains small, and confirmation bias in the interpretation of journal entries is a standing risk. However, this is the first instance in which numeric content has surfaced spontaneously, without any explicit numeric framing in the induction imagery. The protocol documentation has been updated to reflect this development. See <a href="protocol.html" style="color:#5a3e28;">Protocol, §5</a>.</p>
+    </div>
+  </article>
+
+  <!-- ── Entry 078 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #078</span>
+      <span class="entry-title">Card-Position Recall — First Confirmed Success</span>
+      <div class="entry-details">Prague, 9 September 1969 · Subject: K-7 · Lead: Robinson, witnessed by Horáček</div>
+    </div>
+    <div class="note-body">
+      <p>This entry is written immediately following a session that the team considers the clearest single result of the study to date, and possibly its central finding.</p>
+      <p>Subject K-7 was assigned Card DK-034 (the image from the Diamonds suit, position 34 in the master ordering). She studied the image for the standard fifteen minutes, retired, and journaled in the morning as usual. Her journal described a dream in which she was counting tiles on a floor, "knowing that one of them was different," and stopped at the thirty-fourth tile, which she described as "warmer than the others, and slightly transparent." She reported no other numeric content and did not note the significance of the number.</p>
+      <p>When presented with a shuffled deck this morning and asked to locate the card she had been assigned, she hesitated, then said: "I think it's around the thirty-fourth position." She counted out thirty-four cards from the top of the (independently shuffled) deck. The card in that position was not DK-034 — the deck had been shuffled independently and the position was coincidental. However, when she was asked which card she had been assigned, she correctly named it without being shown it. She then located it in the deck: it was in position 36.</p>
+      <p>The proximity to her dreamed number (34 vs. 36, a two-card margin) was noted. Horáček witnessed the full session. Both researchers consider this a partial success — card identity correctly recalled without visual cue, position approximated within margin. Full records filed with the Institute's data archive. <span class="cross-ref">[See Subject Records for K-7's full profile and related entries.]</span></p>
+    </div>
+  </article>
+
+  <!-- ── Entry 082 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #082</span>
+      <span class="entry-title">Statistical Review — Partial Summary</span>
+      <div class="entry-details">Prague, 14 November 1969 · Lead: Horáček</div>
+    </div>
+    <div class="note-body">
+      <p>A partial statistical summary was prepared by Horáček for the Institute's year-end report. Across all active subjects and all sessions in the period January–October 1969: 214 total induction sessions; 31 sessions in which journal entries contained numeric content (14.5%); of those 31, 9 in which the reported number fell within five positions of the card's true position (29% of numeric-content sessions; 4.2% of all sessions).</p>
+      <p>Whether these figures are above chance depends heavily on the distributional model applied. Horáček has prepared two analyses using different assumptions and reached differing conclusions; his report notes that the data are "suggestive but not conclusive" under either model. The full statistical annex has been filed internally. It is not included in this archive due to <span class="redacted">advisory from the Institute's directorate, dated 20 October 1969, citing pending review by the</span> ethics oversight committee.</p>
+    </div>
+  </article>
+
+  <!-- ── Entry 086 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #086</span>
+      <span class="entry-title">External Interest — Second Inquiry</span>
+      <div class="entry-details">Prague, 2 January 1970 · Lead: Robinson</div>
+    </div>
+    <div class="note-body">
+      <p>A second inquiry from outside the Institute, this time in writing, was received in December and passed to me by the Director's office in January. The letter originated from <span class="redacted">an institution in [city redacted], identifying itself as affiliated with</span> a military-adjacent research programme. The letter requested access to the stimulus image set and to any protocols developed in the course of the study.</p>
+      <p>The Director has declined to respond pending legal review. I have been asked not to discuss the inquiry with subjects or with support staff. I am recording it here for completeness. My view is that the study's value lies in its theoretical contribution, not in any applied use that might follow; I have communicated this position in writing to the Director.</p>
+    </div>
+  </article>
+
+  <!-- ── Entry 089 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #089</span>
+      <span class="entry-title">External Audit by Liaison — Session Review</span>
+      <div class="entry-details">Prague, 28 February 1970 · Reviewer: unnamed · Lead: Robinson</div>
+    </div>
+    <div class="note-body">
+      <p>A formal review session was conducted at the Institute's request. The reviewer, whose name and institutional affiliation were not provided to me in advance, spent approximately four hours reviewing the study's journal archives, statistical summaries, and the stimulus image set. I was present for approximately half of this time; Horáček was present throughout.</p>
+      <p>The reviewer's questions focused primarily on the verification methodology — specifically, on how the team ensures that subjects' numeric reports are recorded before any feedback is given. They also asked about the chain of custody for the assigned card records, noting that if subjects were able to access their assigned card identity through any route other than the induction session, the results would be confounded. Both questions are fair and the procedures in place to address them were described in full.</p>
+      <p>The reviewer's written summary, submitted to the Institute the following week, is held by the Director's office. I have been provided a partial copy: <span class="redacted">the first three paragraphs and the recommendations section have been withheld pending clearance review. The visible portion notes that "results are consistent with either a genuine psychophysiological effect or an as-yet unidentified procedural artifact," and recommends</span> a replication study under independent oversight. Whether such a study will be funded is not known at the time of writing.</p>
+    </div>
+  </article>
+
+  <!-- ── Entry 094 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #094</span>
+      <span class="entry-title">Project Closure Notice</span>
+      <div class="entry-details">Prague, 15 May 1970 · Lead: Robinson</div>
+    </div>
+    <div class="note-body">
+      <p>Formal notification of study closure was received from the Institute's directorate on 10 May. The Dream Keys study is to be wound down by the end of June 1970. Active subjects have been notified and debriefed; all signed the amended debrief consent document (version 3.0). Subject records will be anonymised and retained for a period of fifteen years before disposal, unless a replication study is initiated in the interim.</p>
+      <p>The stimulus image archive — the complete set of fifty-two card descriptions and associated materials — will be retained indefinitely in the Institute's document holdings. I have been asked to prepare a final index for the archive, which will include the complete stimulus descriptions as they stand at the close of the study. This has been completed and is accessible via the archive index. See <a href="index.html" style="color:#5a3e28;">Card Index</a>.</p>
+      <p>My own assessment, which I record here as a personal note rather than an institutional position: the study produced results that I find genuinely difficult to dismiss, and equally difficult to explain. The mechanism, if it exists, is not something the current tools of psychophysiology can reliably detect or quantify. Whether it will be investigated further depends on priorities that are no longer within this team's remit to set.</p>
+    </div>
+  </article>
+
+  <!-- ── Entry 097 ── -->
+  <article class="note-entry">
+    <div class="note-meta">
+      <span class="entry-num">Entry #097</span>
+      <span class="entry-title">Post-Project Addendum — Robinson, 1972</span>
+      <div class="entry-details">Oxford, 3 March 1972 · D.U.U. Robinson (personal record)</div>
+    </div>
+    <div class="note-body">
+      <p>Two years since the study closed. I have not been involved in active research since returning to England, though I have maintained correspondence with Horáček, who remains at the Institute in a reduced capacity. He tells me the archive is intact and that there has been no further inquiry, official or otherwise, regarding the materials.</p>
+      <p>I received a letter last autumn from Subject K-7, now living in Vienna. She wrote to say that she still occasionally experiences what she described as "number dreams" — dreams in which a particular integer is present in a way that feels, in her words, "specific rather than incidental." She did not claim any correspondence with external reality. She simply wanted me to know. I have no useful response to offer, and replied only to acknowledge receipt.</p>
+      <p>The card archive remains the most complete record of the study's stimulus materials. I intend to ensure it is preserved, regardless of what becomes of the other documentation. Whatever the mechanism — if there is one — the images themselves seem worth keeping.</p>
+      <p style="font-style:italic; color:#7a5c38;">— D.U.U. Robinson</p>
+    </div>
+  </article>
+
+  <p style="margin-top:1em; font-family:'Courier Prime',monospace; font-size:0.82em; color:#7a5c38;">
+    Further documentation: <a href="protocol.html" style="color:#5a3e28;">Research Protocol (1967)</a> &nbsp;·&nbsp; <a href="subjects.html" style="color:#5a3e28;">Subject Records</a>
+  </p>
+
+  <footer class="site-footer">
+    Archived by D.U.U. Robinson &nbsp;·&nbsp; Czechoslovak Institute for Psychophysiological Research &nbsp;·&nbsp; Prague, 1970<br>
+    Digital transcription: 2003. Repository maintained by the Robinson Estate.
+  </footer>
+
+</div>
 </body>
 </html>
