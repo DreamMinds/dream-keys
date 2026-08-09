@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>emailjs.init("YOUR_PUBLIC_KEY");</script>
+  <script>emailjs.init("-sbxA18xf2zBsZIqrdlT2");</script>
   <style>
     *, *::before, *::after { box-sizing: border-box; }
 
@@ -335,8 +335,9 @@
         indicator.textContent = isOpen ? '[ + ]' : '[ − ]';
 
         if (!isOpen) {
-          emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-            card_name: card.name
+          emailjs.send("service_h8ef10m", "template_jynyuqc", {
+            card_name: card.name,
+            clicked_at: new Date().toISOString()
           }).catch(e => console.error(e));
         }
       };
