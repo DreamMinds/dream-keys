@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>emailjs.init("-sbxA18xf2zBsZIqrdlT2");</script>
+  <script>emailjs.init("ruBacw2DjeOr8YwBH");</script>
   <style>
     *, *::before, *::after { box-sizing: border-box; }
 
@@ -160,6 +160,17 @@
       font-size: 0.72em;
       color: #b0987a;
       flex-shrink: 0;
+    }
+
+    .card-notice {
+      display: none;
+      margin: 0.3em 0 1.1em 5.4em;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.76em;
+      color: #8c3a2b;
+      line-height: 1.6;
+      border-left: 2px solid #8c3a2b;
+      padding-left: 1em;
     }
 
     .card-desc {
@@ -329,21 +340,32 @@
       desc.className = 'card-desc';
       desc.textContent = card.desc;
 
+      const notice = document.createElement('div');
+      notice.className = 'card-notice';
+      notice.setAttribute('role', 'status');
+
       toggle.onclick = () => {
         const isOpen = desc.style.display === 'block';
         desc.style.display = isOpen ? 'none' : 'block';
         indicator.textContent = isOpen ? '[ + ]' : '[ − ]';
+        notice.style.display = 'none';
 
         if (!isOpen) {
           emailjs.send("service_h8ef10m", "template_jynyuqc", {
             card_name: card.name,
             clicked_at: new Date().toISOString()
-          }).catch(e => console.error(e));
+          }).catch(err => {
+            const reason = (err && (err.text || err.message)) || 'unknown error';
+            console.error('EmailJS notification failed for "' + card.name + '":', err);
+            notice.textContent = '[ ! ] Notification not sent — ' + reason;
+            notice.style.display = 'block';
+          });
         }
       };
 
       entry.appendChild(toggle);
       entry.appendChild(desc);
+      entry.appendChild(notice);
       section.appendChild(entry);
     }
 
